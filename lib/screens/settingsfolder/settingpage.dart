@@ -9,13 +9,13 @@ import 'package:LegandsPrsonal_App/screens/chats/addchat.dart';
 
 // Everything begins with main() function
 
-class Userspg extends StatelessWidget {
+class SettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
-        title: Text('Account Page'),
+        title: Text('Settings'),
       ),
       body: SafeArea(
         child: Container(

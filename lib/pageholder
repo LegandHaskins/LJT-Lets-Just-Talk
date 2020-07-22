@@ -1,0 +1,38 @@
+import 'package:flutter/material.dart';
+
+// Everything begins with main() function
+
+class Feedpage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.red,
+      body: SafeArea(
+        child: Container(
+          child: Row(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(top: 80, bottom: 80, left: 8, right: 8),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Icon(Icons.remove_red_eye, size: 40),
+                  Icon(Icons.subscriptions, size: 35),
+                  Icon(Icons.home, size: 40),
+                  Icon(Icons.person, size: 40),
+                  Icon(Icons.search, size: 40),
+                  Icon(Icons.settings, size: 30),
+                ],
+              ),
+            ),
+            Column(
+              children: <Widget>[
+                
+              ],
+            ),
+          ],
+        )),
+      ),
+    );
+  }
+}

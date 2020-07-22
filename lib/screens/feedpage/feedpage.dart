@@ -1,43 +1,66 @@
+import 'package:LegandsPrsonal_App/screens/chats/chatpage.dart';
+import 'package:LegandsPrsonal_App/screens/chats/side_nav.dart';
 import 'package:flutter/material.dart';
+import 'package:LegandsPrsonal_App/screens/chats/feedchhistory/chthistory.dart';
+import 'package:LegandsPrsonal_App/screens/chats/searchchats/searchchat.dart';
+import 'package:LegandsPrsonal_App/screens/subpage/subscriptionpage.dart';
+import 'package:LegandsPrsonal_App/screens/userpg/userspg.dart';
+import 'package:LegandsPrsonal_App/screens/feedpage/feedpage.dart';
+import 'package:LegandsPrsonal_App/screens/settingsfolder/settingpage.dart';
+import 'package:LegandsPrsonal_App/screens/chats/addchat.dart';
 
 // Everything begins with main() function
-void main() {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: Home(),
-  ));
-}
 
-class Feed extends StatelessWidget {
+class Feedpage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue[300],
+      appBar: AppBar(
+        backgroundColor: Colors.blue[300],
+        title: Text('Latest Feed Page'),
+      ),
       body: SafeArea(
-        child: Container(
-          child: Row(
+        child: Row(
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(top: 80, bottom: 80, left: 8, right: 8),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Icon(Icons.home, size: 50),
-                  Icon(Icons.thumb_up size: 40),
-                  Icon(Icons.remove_red_eye, size: 40),
-                  Icon(Icons.search, size: 40),
-                  Icon(Icons.person, size: 40),
-                  Icon(Icons.settings, size: 30),
-                ],
+            SideNavBar(),
+            SingleChildScrollView(
+              child: Container(
+                width: MediaQuery.of(context).size.width * .85,
+                child: Column(
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.all(12.0),
+                      child: ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: 10,
+                          itemBuilder: (context, index) {
+                            return Card(
+                              child: Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Column(
+                                    children: <Widget>[
+                                      Image.network(
+                                          'https://images.unsplash.com/photo-1577563908411-5077b6dc7624?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'),
+                                      Padding(
+                                        padding: const EdgeInsets.all(20.0),
+                                        child: Text('Chat App'),
+                                      ),
+                                    ],
+                                  )),
+                            );
+                          }),
+                    ),
+                  ],
+                ),
               ),
             ),
-            Column(
-              children: <Widget>[
-                
-              ],
-            ),
           ],
-        )),
+        ),
       ),
     );
   }
 }
+
+

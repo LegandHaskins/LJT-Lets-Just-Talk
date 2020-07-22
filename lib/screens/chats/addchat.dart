@@ -7,20 +7,20 @@ import 'package:LegandsPrsonal_App/screens/feedpage/feedpage.dart';
 import 'package:LegandsPrsonal_App/screens/settingsfolder/settingpage.dart';
 import 'package:LegandsPrsonal_App/screens/chats/addchat.dart';
 
-// Everything begins with main() function
 
-class Userspg extends StatelessWidget {
+// Everything begins with main() function 
+class AddChat extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
-        title: Text('Account Page'),
+        title: Text('New Chat'),
       ),
       body: SafeArea(
         child: Container(
             color: Colors.blue,
-            margin: EdgeInsets.only(right: 340),
+            // margin: EdgeInsets.only(right: 340),
             child: Row(
               children: <Widget>[
                 Padding(
