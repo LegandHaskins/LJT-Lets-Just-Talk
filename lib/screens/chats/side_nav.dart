@@ -11,6 +11,7 @@ class SideNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.red[400],
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width * .15,
       // color: Colors.blue,

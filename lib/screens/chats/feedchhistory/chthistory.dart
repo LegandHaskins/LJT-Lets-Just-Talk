@@ -14,9 +14,9 @@ class Chthistory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue[300],
+      backgroundColor: Colors.red[400],
       appBar: AppBar(
-        backgroundColor: Colors.blue[300],
+        backgroundColor: Colors.red[400],
         title: Text('Chat History'),
         actions: <Widget>[
           IconButton(
