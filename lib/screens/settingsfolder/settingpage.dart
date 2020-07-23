@@ -14,13 +14,13 @@ class SettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.red[400],
       appBar: AppBar(
         backgroundColor: Colors.red,
         title: Text('Settings'),
       ),
       body: SafeArea(
         child: Container(
-            color: Colors.blue,
             margin: EdgeInsets.only(right: 340),
             child: Row(
               children: <Widget>[

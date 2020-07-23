@@ -21,7 +21,6 @@ class SubscriptionPage extends StatelessWidget {
       ),
       body: SafeArea(
         child: Container(
-            color: Colors.blue,
             margin: EdgeInsets.only(right: 340),
             child: Row(
               children: <Widget>[

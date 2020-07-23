@@ -26,10 +26,9 @@ class Chthistory extends StatelessWidget {
           })
         ],
       ),
-      drawer: Drawer(),
+      // drawer: Drawer(),
       body: SafeArea(
         child: Container(
-            color: Colors.blue,
             margin: EdgeInsets.only(right: 340),
             child: Row(
               children: <Widget>[

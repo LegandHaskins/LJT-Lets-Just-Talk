@@ -12,7 +12,8 @@ class Landingpg extends StatelessWidget {
       ),
     );
     return Scaffold(
-      
+      backgroundColor: Colors.red[400],
+
     );
   }
 }

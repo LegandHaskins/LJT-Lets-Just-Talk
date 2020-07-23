@@ -14,17 +14,20 @@ class Userspg extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.red[400],
+      drawer: Drawer(
+         child: SideNavBar()
+      ),
       appBar: AppBar(
         backgroundColor: Colors.red,
         title: Text('Account Page'),
       ),
       body: SafeArea(
         child: Container(
-            color: Colors.blue,
             margin: EdgeInsets.only(right: 340),
             child: Row(
               children: <Widget>[
-                SideNavBar(),
+                // SideNavBar(),
                 SingleChildScrollView(
                   child: Column(
                     children: <Widget>[],
