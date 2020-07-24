@@ -16,7 +16,7 @@ class SettingPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.red[400],
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.red[400],
         title: Text('Settings'),
       ),
       body: SafeArea(
