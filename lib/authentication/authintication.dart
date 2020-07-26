@@ -1,5 +1,6 @@
 import 'package:LegandsPrsonal_App/authentication/login.dart';
 import 'package:LegandsPrsonal_App/authentication/register.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Authenticate extends StatefulWidget {
