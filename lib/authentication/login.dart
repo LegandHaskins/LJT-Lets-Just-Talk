@@ -1,9 +1,12 @@
 import 'package:LegandsPrsonal_App/auth.dart';
+import 'package:LegandsPrsonal_App/screens/feedpage/feedpage.dart';
 import 'package:LegandsPrsonal_App/user.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:LegandsPrsonal_App/authentication/login.dart';
+// import 'package:LegandsPrsonal_App/authentication/login.dart';
 
 class Login extends StatefulWidget {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   final Function toggleView;
   Login({ this.toggleView});
   _LoginState createState() => _LoginState();
@@ -11,11 +14,14 @@ class Login extends StatefulWidget {
   @override
 class _LoginState extends State<Login> {
   // variables for user email & password
+  String error = '';
+  bool loading = false;
 
   String email = "";
   String password = "";
-  final _formKey = GlobalKey<FormState>();
   Auth auth = Auth();
+  final _formKey = GlobalKey<FormState>();
+  // Auth auth = Auth();
 
   @override
   Widget build(BuildContext context) {
@@ -80,9 +86,17 @@ class _LoginState extends State<Login> {
                       padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                       onPressed: () async {
                         if (_formKey.currentState.validate()) {
-                          User user = await auth.registerUser(email, password);
-                          print(user.uid);
-                          print(user.email);
+                          print(email);
+                          print(password);
+                          User user = await auth.signInWithEmailAndPassword(email, password);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return Feedpage();
+                              },
+                            ),
+                          );
                         }
                       },
                       child: Text(
@@ -103,64 +117,3 @@ class _LoginState extends State<Login> {
     );
   }
 }
-// import 'package:flutter/material.dart';
-// import 'package:LegandsPrsonal_App/authentication/register.dart';
-
-// // Everything begins with main() function
-// class Login extends StatefulWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     var container = Container(
-//       height: 300,
-//       width: 300,
-//       decoration: new BoxDecoration(
-//         color: Colors.orange,
-//         shape: BoxShape.circle,
-//       ),
-//     );
-//     return Scaffold(
-//       appBar: AppBar(
-//         backgroundColor: Colors.green[300],
-//         title: Text('Login'),
-//       ),
-//       body: SingleChildScrollView(
-//         child: Column(
-//           children: [
-//             SizedBox(
-//               height: 200,
-//             ),
-//             Center(
-//               child: container,
-//             ),
-//             Material(
-//               elevation: 10,
-//               child: MaterialButton(
-//                 onPressed: () async {
-//                   Navigator.push(
-//                     context,
-//                     MaterialPageRoute(builder: (context) => SignIn()),
-//                   );
-//                 },
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-
-//   @override
-//   State<StatefulWidget> createState() {
-//     // TODO: implement createState
-//     throw UnimplementedError();
-//   }
-// }
-
-// class SignIn extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(),
-//     );
-//   }
-// }

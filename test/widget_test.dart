@@ -9,7 +9,7 @@ import 'package:LegandsPrsonal_App/screens/feedpage/feedpage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:LegandsPrsonal_App/services/main.dart';
+// import 'package:LegandsPrsonal_App/services/main.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {

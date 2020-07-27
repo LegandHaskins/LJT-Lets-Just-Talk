@@ -1,12 +1,12 @@
 import 'package:LegandsPrsonal_App/screens/chats/side_nav.dart';
 import 'package:flutter/material.dart';
-import 'package:LegandsPrsonal_App/screens/chats/feedchhistory/chthistory.dart';
-import 'package:LegandsPrsonal_App/screens/chats/searchchats/searchchat.dart';
-import 'package:LegandsPrsonal_App/screens/subpage/subscriptionpage.dart';
-import 'package:LegandsPrsonal_App/screens/userpg/userspg.dart';
-import 'package:LegandsPrsonal_App/screens/feedpage/feedpage.dart';
-import 'package:LegandsPrsonal_App/screens/settingsfolder/settingpage.dart';
-import 'package:LegandsPrsonal_App/screens/chats/addchat.dart';
+// import 'package:LegandsPrsonal_App/screens/chats/feedchhistory/chthistory.dart';
+// import 'package:LegandsPrsonal_App/screens/chats/searchchats/searchchat.dart';
+// import 'package:LegandsPrsonal_App/screens/subpage/subscriptionpage.dart';
+// import 'package:LegandsPrsonal_App/screens/userpg/userspg.dart';
+// import 'package:LegandsPrsonal_App/screens/feedpage/feedpage.dart';
+// import 'package:LegandsPrsonal_App/screens/settingsfolder/settingpage.dart';
+// import 'package:LegandsPrsonal_App/screens/chats/addchat.dart';
 
 // Everything begins with main() function
 

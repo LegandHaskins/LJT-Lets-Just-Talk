@@ -1,18 +1,24 @@
+import 'package:LegandsPrsonal_App/auth.dart';
+import 'package:LegandsPrsonal_App/screens/feedpage/feedpage.dart';
+import 'package:LegandsPrsonal_App/user.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:LegandsPrsonal_App/authentication/register.dart';
 
 // Everything begins with main() function
 class Register extends StatefulWidget {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   final Function toggleView;
-  Register({ this.toggleView});
+  Register({this.toggleView});
   _RegisterState createState() => _RegisterState();
 }
-  @override
+
+@override
 class _RegisterState extends State<Register> {
   // variables for user email & password
 
   String email = "";
   String password = "";
+  Auth auth = Auth();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -45,7 +51,8 @@ class _RegisterState extends State<Register> {
                       setState(() => email = val.trim());
                     },
                     decoration: InputDecoration(
-                        contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                        contentPadding:
+                            EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                         hintText: 'Email',
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(32.0))),
@@ -55,13 +62,15 @@ class _RegisterState extends State<Register> {
                   ),
                   TextFormField(
                     obscureText: true,
-                    validator: (val) =>
-                        val.length < 6 ? 'Enter a password 6+ chars long' : null,
+                    validator: (val) => val.length < 6
+                        ? 'Enter a password 6+ chars long'
+                        : null,
                     onChanged: (val) {
                       setState(() => password = val.trim());
                     },
                     decoration: InputDecoration(
-                        contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                        contentPadding:
+                            EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                         hintText: 'Password',
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(32.0))),
@@ -80,10 +89,19 @@ class _RegisterState extends State<Register> {
                         if (_formKey.currentState.validate()) {
                           print(email);
                           print(password);
+                          User user = await auth.registerUser(email, password);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return Feedpage();
+                              },
+                            ),
+                          );
                         }
                       },
                       child: Text(
-                        "Login",
+                        "Register",
                         style: TextStyle(
                           color: Colors.white,
                         ),
