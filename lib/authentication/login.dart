@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 // import 'package:LegandsPrsonal_App/authentication/login.dart';
 
 class Login extends StatefulWidget {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final Function toggleView;
-  Login({ this.toggleView});
+  // final FirebaseAuth _auth = FirebaseAuth.instance;
+  // final Function toggleView;
+  // Login({ this.toggleView});
   _LoginState createState() => _LoginState();
 }
   @override
@@ -27,13 +27,13 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: <Widget>[
-          FlatButton.icon(
-            icon: Icon(Icons.person),
-            label: Text('Login'),
-            onPressed: () => widget.toggleView(),
-          )
-        ],
+        // actions: <Widget>[
+        //   FlatButton.icon(
+        //     icon: Icon(Icons.person),
+        //     label: Text('Login'),
+        //     onPressed: () => widget.toggleView(),
+        //   )
+        // ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(24.0),
@@ -86,17 +86,20 @@ class _LoginState extends State<Login> {
                       padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                       onPressed: () async {
                         if (_formKey.currentState.validate()) {
-                          print(email);
-                          print(password);
-                          User user = await auth.signInWithEmailAndPassword(email, password);
+                          User user = await auth.loginUser(email, password);
+                          print(user.uid);
+                          print(user.email);
+                        }
+                        FirebaseUser user =
+                            await FirebaseAuth.instance.currentUser();
+                        if (user != null) {
+                          alertDialog(context);
                           Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return Feedpage();
-                              },
-                            ),
+                          context,
+                            MaterialPageRoute(builder: (context) => Feedpage()),
                           );
+                        } else {
+                          showAlertDialog(context);
                         }
                       },
                       child: Text(
@@ -116,4 +119,60 @@ class _LoginState extends State<Login> {
       ),
     );
   }
+}
+
+
+showAlertDialog(BuildContext context) {
+
+  // set up the button
+  Widget okButton = FlatButton(
+    child: Text("OK"),
+    onPressed: () { 
+      Navigator.of(context).pop();
+    },
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text("Wrong Log In"),
+    content: Text("Username or Password dont match"),
+    actions: [
+      okButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}
+
+alertDialog(BuildContext context) {
+
+  // set up the button
+  Widget okButton = FlatButton(
+    child: Text("OK"),
+    onPressed: () { 
+      Navigator.of(context).pop();
+    },
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text("You Have Logged In"),
+    actions: [
+      okButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }

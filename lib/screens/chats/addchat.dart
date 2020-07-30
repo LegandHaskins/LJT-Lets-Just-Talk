@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 // import 'package:LegandsPrsonal_App/screens/settingsfolder/settingpage.dart';
 // import 'package:LegandsPrsonal_App/screens/chats/addchat.dart';
 
-
 // Everything begins with main() function 
 class AddChat extends StatelessWidget {
   @override
@@ -23,15 +22,9 @@ class AddChat extends StatelessWidget {
         title: Text('New Chat'),
       ),
       body: SafeArea(
-        child: Container(
-            // margin: EdgeInsets.only(right: 340),
-            child: Row(
-              children: <Widget>[
-                Column(
-                  children: <Widget>[],
-                ),
-              ],
-            )),
+        child: Row(
+          
+        ),
       ),
     );
   }

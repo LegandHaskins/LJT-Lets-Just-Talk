@@ -17,24 +17,23 @@ class Auth {
     return _userFromFirebaseUser(user);
   }
 
-  Future signInWithEmailAndPassword(String email, String password) async {
-    AuthResult result = await _auth.signInWithEmailAndPassword(email: email, password: password);
+  Future<User> loginUser(email, password) async {
+    AuthResult result = await _auth.signInWithEmailAndPassword(
+        email: email, password: password);
     FirebaseUser user = result.user;
-    return user;
-  } 
+    return userFromFirebase(user);
+  }
 
-  // return (await _firebaseAuth.signInWithEmailAndPassword(
-  // Future signInAnon() async {
-  //   try {
-  //     AuthResult result = await _auth.signInAnonymously();
-  //     FirebaseUser user = result.user;
-  //     return _userFromFirebaseUser(user);
-  //   } catch (e) {
-  //     print(e.toString());
-  //     return null;
-  //   }
-  // }
   User userFromFirebase(user) {
     return User(email: user.email, uid: user.uid);
+  }
+
+  Future signout() async {
+    try {
+      return await _auth.signOut();
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
   }
 }
