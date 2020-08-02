@@ -1,12 +1,17 @@
-import 'package:LegandsPrsonal_App/user.dart';
+import 'package:LegandsPrsonal_App/services/data_services.dart';
+import 'package:LegandsPrsonal_App/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Auth {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  DataService service= DataService();
 
   User _userFromFirebaseUser(FirebaseUser user) {
-    return user != null ? User(uid: user.uid) : null;
+    return User(
+      uid: user.uid,
+      email: user.email,
+    );
   }
 
 
@@ -14,6 +19,7 @@ class Auth {
     AuthResult result = await _auth.createUserWithEmailAndPassword(
         email: email, password: password);
     FirebaseUser user = result.user;
+    DataService(uid: user.uid).saveUser(user);
     return _userFromFirebaseUser(user);
   }
 
@@ -22,6 +28,10 @@ class Auth {
         email: email, password: password);
     FirebaseUser user = result.user;
     return userFromFirebase(user);
+  }
+
+  Stream<User> get user {
+    return _auth.onAuthStateChanged.map(_userFromFirebaseUser);
   }
 
   User userFromFirebase(user) {

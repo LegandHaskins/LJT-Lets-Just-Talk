@@ -66,7 +66,7 @@ class SideNavBar extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return Feedpage();
+                      return Chats();
                     },
                   ),
                 );

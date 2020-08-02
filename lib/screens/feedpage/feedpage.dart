@@ -1,5 +1,7 @@
 // import 'package:LegandsPrsonal_App/screens/chats/chatpage.dart';
+import 'package:LegandsPrsonal_App/models/chat.dart';
 import 'package:LegandsPrsonal_App/screens/chats/side_nav.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 // import 'package:LegandsPrsonal_App/screens/chats/feedchhistory/chthistory.dart';
 // import 'package:LegandsPrsonal_App/screens/chats/searchchats/searchchat.dart';
@@ -11,7 +13,36 @@ import 'package:flutter/material.dart';
 
 // Everything begins with main() function
 
-class Feedpage extends StatelessWidget {
+
+class ChatsData extends StatefulWidget {
+  _ChatsDataState createState() => _ChatsDataState();
+}
+
+class _ChatsDataState extends State<ChatsData> {
+  @override
+  Widget build(BuildContext context) {
+    final dataRef = FirebaseDatabase.instance.reference().child('teachers');
+    return StreamBuilder(
+        stream: dataRef.onValue,
+        builder: (BuildContext context, AsyncSnapshot<Event> snapshot) {
+          if (snapshot.hasData) {
+            List<Chat> list = [];
+            Map<dynamic, dynamic> map = snapshot.data.snapshot.value;
+            map.forEach((k, v) => list.add(Teacher(
+                fname: v['fname'],
+                lname: v['lname'],
+                grade: v['grade'],
+                subject: v['subject'],
+                uid: v['uid'])));
+            return Teachers(teachers: list);
+          } else {
+            return Container();
+          }
+        });
+  }
+}
+
+class Chats extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
