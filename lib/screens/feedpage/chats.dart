@@ -21,28 +21,33 @@ class ChatsData extends StatefulWidget {
 class _ChatsDataState extends State<ChatsData> {
   @override
   Widget build(BuildContext context) {
-    final dataRef = FirebaseDatabase.instance.reference().child('teachers');
+    final dataRef = FirebaseDatabase.instance.reference().child('chats');
     return StreamBuilder(
         stream: dataRef.onValue,
         builder: (BuildContext context, AsyncSnapshot<Event> snapshot) {
-          if (snapshot.hasData) {
+          if (snapshot.hasData){
+          if (snapshot!=null ) {
             List<Chat> list = [];
             Map<dynamic, dynamic> map = snapshot.data.snapshot.value;
-            map.forEach((k, v) => list.add(Teacher(
-                fname: v['fname'],
-                lname: v['lname'],
-                grade: v['grade'],
-                subject: v['subject'],
-                uid: v['uid'])));
-            return Teachers(teachers: list);
+            map.forEach((k, v) => list.add(Chat(
+                title: v['title'], url: v['url'], uid: v['uid'])));
+            return Chats(chats: list);
           } else {
             return Container();
+          }
           }
         });
   }
 }
 
-class Chats extends StatelessWidget {
+class Chats extends StatefulWidget {
+  final List<Chat> chats;
+  Chats({this.chats});
+  _ChatsState createState() => _ChatsState();
+}
+
+class _ChatsState extends State<Chats> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,30 +63,18 @@ class Chats extends StatelessWidget {
             SingleChildScrollView(
               child: Container(
                 width: MediaQuery.of(context).size.width * .85,
+                // width: 40,
                 child: Column(
                   children: <Widget>[
                     Padding(
                       padding: EdgeInsets.all(12.0),
                       child: ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: 10,
-                          itemBuilder: (context, index) {
-                            return Card(
-                              child: Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Column(
-                                    children: <Widget>[
-                                      Image.network(
-                                          'https://images.unsplash.com/photo-1577563908411-5077b6dc7624?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'),
-                                      Padding(
-                                        padding: const EdgeInsets.all(20.0),
-                                        child: Text('Chat App'),
-                                      ),
-                                    ],
-                                  )),
-                            );
-                          }),
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: widget.chats.length,
+                        itemBuilder: (context, index) {
+                          return SingleChat(chat: widget.chats[index]);
+                        }),
                     ),
                   ],
                 ),
@@ -94,4 +87,34 @@ class Chats extends StatelessWidget {
   }
 }
 
+class SingleChat extends StatelessWidget {
+  final Chat chat;
+  SingleChat({Key key, this.chat}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+      child: Column(
+        children: [
+          Card(
+            child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Column(
+                  children: <Widget>[
+                    Image.network(
+                      chat.url
+                    ),
 
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Text(chat.title),
+                    ),
+                  ],
+                )
+            ),
+          ),
+        ],
+      ),
+    );    
+  }
+}

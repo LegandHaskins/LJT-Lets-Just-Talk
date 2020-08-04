@@ -1,11 +1,15 @@
 import 'dart:io';
 import 'package:LegandsPrsonal_App/auth.dart';
+import 'package:LegandsPrsonal_App/models/user.dart';
 import 'package:LegandsPrsonal_App/screens/chats/side_nav.dart';
 import 'package:LegandsPrsonal_App/screens/const.dart';
+import 'package:LegandsPrsonal_App/screens/feedpage/chats.dart';
+import 'package:LegandsPrsonal_App/services/data_services.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker_modern/image_picker_modern.dart';
 import 'package:path/path.dart';
+import 'package:provider/provider.dart';
 // import 'package:LegandsPrsonal_App/screens/chats/feedchhistory/chthistory.dart';
 // import 'package:LegandsPrsonal_App/screens/chats/searchchats/searchchat.dart';
 // import 'package:LegandsPrsonal_App/screens/subpage/subscriptionpage.dart';
@@ -23,9 +27,9 @@ class AddChat extends StatefulWidget {
 class _AddChatState extends State<AddChat> {
   final Auth _auth = Auth();
   File _image;
-  String imageUrl;
-  String title;
-
+  String url = "";
+  String title = "";
+  final _formKey = GlobalKey<FormState>();
   Future uploadFile() async {
     StorageReference storageReference = FirebaseStorage.instance
         .ref()
@@ -35,7 +39,7 @@ class _AddChatState extends State<AddChat> {
     print('File Uploaded');
     storageReference.getDownloadURL().then((fileURL) {
       setState(() {
-        imageUrl = fileURL;
+        url = fileURL;
       });
     });
   }
@@ -49,6 +53,8 @@ class _AddChatState extends State<AddChat> {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<User>(context);
+
     return Scaffold(
       backgroundColor: Colors.red[400],
       drawer: Drawer(child: SideNavBar()),
@@ -151,9 +157,19 @@ class _AddChatState extends State<AddChat> {
                               Icons.add_circle,
                               size: 55,
                             ),
-                            onPressed: () {
+                            
+                            onPressed: () async {
                               uploadFile();
+                              print(user);
                               print(title);
+                              // if (_formKey.currentState.validate()) {
+                                await DataService(uid: user.uid)
+                                      .saveChat(title, url);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => ChatsData()),
+                                  );
+                              // }
                             },
                           ),
                         ],

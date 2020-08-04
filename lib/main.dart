@@ -1,7 +1,5 @@
 // import 'package:LegandsPrsonal_App/authentication/login.dart'; 
 import 'package:LegandsPrsonal_App/auth.dart';
-import 'package:LegandsPrsonal_App/authentication/register.dart';
-import 'package:LegandsPrsonal_App/screens/enterance_page/landingpg.dart';
 import 'package:LegandsPrsonal_App/screens/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

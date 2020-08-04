@@ -1,5 +1,5 @@
 import 'package:LegandsPrsonal_App/auth.dart';
-import 'package:LegandsPrsonal_App/screens/feedpage/feedpage.dart';
+import 'package:LegandsPrsonal_App/screens/feedpage/chats.dart';
 import 'package:LegandsPrsonal_App/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -96,7 +96,7 @@ class _LoginState extends State<Login> {
                           alertDialog(context);
                           Navigator.push(
                           context,
-                            MaterialPageRoute(builder: (context) => Feedpage()),
+                            MaterialPageRoute(builder: (context) => Chats()),
                           );
                         } else {
                           showAlertDialog(context);

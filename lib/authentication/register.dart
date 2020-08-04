@@ -1,6 +1,6 @@
 import 'package:LegandsPrsonal_App/auth.dart';
-import 'package:LegandsPrsonal_App/screens/feedpage/feedpage.dart';
 import 'package:LegandsPrsonal_App/models/user.dart';
+import 'package:LegandsPrsonal_App/screens/feedpage/chats.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -94,7 +94,7 @@ class _RegisterState extends State<Register> {
                             context,
                             MaterialPageRoute(
                               builder: (context) {
-                                return Feedpage();
+                                return Chats();
                               },
                             ),
                           );
